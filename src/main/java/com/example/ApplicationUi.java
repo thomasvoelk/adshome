@@ -10,8 +10,7 @@ import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import org.vaadin.spring.i18n.*;
 
-@Theme("mytheme")
-@Title("AwesomeApp")
+@Theme("ads")
 @SpringUI
 public class ApplicationUi extends UI {
 
@@ -45,6 +44,7 @@ public class ApplicationUi extends UI {
         setupEventBus();
         setContent(layout);
         setupNavigator();
+        Page.getCurrent().setTitle(i18n.get("application.title"));
     }
 
     private void setupNavigator() {

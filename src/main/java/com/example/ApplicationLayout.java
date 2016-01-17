@@ -14,12 +14,12 @@ public class ApplicationLayout extends HorizontalLayout implements View {
 
     public static final String VIEW_NAME = "layout";
     protected Panel content;
-    private NavigationBar navBar;
+    private NavigationBar navigationBar;
     private I18N i18n;
 
     @Autowired
     public ApplicationLayout(NavigationBar navigationBar, I18N i18n) {
-        this.navBar = navigationBar;
+        this.navigationBar = navigationBar;
         this.i18n = i18n;
     }
 
@@ -35,14 +35,14 @@ public class ApplicationLayout extends HorizontalLayout implements View {
         registerView(TicketView.class);
         content = new Panel();
         content.setSizeFull();
-        content.addStyleName(MyTheme.PANEL_BORDERLESS);
-        addComponents(navBar, content);
+        content.addStyleName(AdsTheme.PANEL_BORDERLESS);
+        addComponents(navigationBar, content);
         setExpandRatio(content, 1);
     }
 
     private void registerView(Class<? extends View> viewClass) {
         ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
-        navBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
+        navigationBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
     }
 
     @Override

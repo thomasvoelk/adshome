@@ -26,12 +26,12 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
     @PostConstruct
     private void init() {
         setHeight("100%");
-        addStyleName(MyTheme.MENU_ROOT);
-        addStyleName(MyTheme.NAVBAR);
+        addStyleName(AdsTheme.MENU_ROOT);
+        addStyleName(AdsTheme.NAVIGATION_BAR);
         layout = new VerticalSpacedLayout();
         addComponent(layout);
         Label logo = new Label(i18n.get("application.title"));
-        logo.addStyleName(MyTheme.MENU_TITLE);
+        logo.addStyleName(AdsTheme.MENU_TITLE);
         layout.addComponent(logo);
         addLogoutButton();
     }
@@ -39,8 +39,8 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
     public void addView(String viewName, String caption) {
         Button button = new Button(caption, click -> EventBus.post(new NavigationEvent(viewName)));
         button.addClickListener(event -> getUI().getNavigator().navigateTo(viewName));
-        button.addStyleName(MyTheme.MENU_ITEM);
-        button.addStyleName(MyTheme.BUTTON_BORDERLESS);
+        button.addStyleName(AdsTheme.MENU_ITEM);
+        button.addStyleName(AdsTheme.BUTTON_BORDERLESS);
         button.setIcon(FontAwesome.HOME);
         buttonMap.put(viewName, button);
         layout.addComponent(button, layout.getComponentCount() - 1);
@@ -54,17 +54,17 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     @Override
     public void afterViewChange(ViewChangeEvent event) {
-        buttonMap.values().forEach(button -> button.removeStyleName(MyTheme.SELECTED));
+        buttonMap.values().forEach(button -> button.removeStyleName(AdsTheme.SELECTED));
         Button button = buttonMap.get(event.getViewName());
-        if (button != null) button.addStyleName(MyTheme.SELECTED);
+        if (button != null) button.addStyleName(AdsTheme.SELECTED);
     }
 
 
     private void addLogoutButton() {
         Button logout = new Button("Log out", click -> EventBus.post(new LogoutEvent()));
         layout.addComponent(logout);
-        logout.addStyleName(MyTheme.BUTTON_LOGOUT);
-        logout.addStyleName(MyTheme.BUTTON_BORDERLESS);
+        logout.addStyleName(AdsTheme.BUTTON_LOGOUT);
+        logout.addStyleName(AdsTheme.BUTTON_BORDERLESS);
         logout.setIcon(FontAwesome.SIGN_OUT);
     }
 }

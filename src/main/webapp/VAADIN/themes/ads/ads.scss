@@ -21,17 +21,11 @@
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
 @import "../valo/valo.scss";
-@import "views/render.scss";
 
-@mixin mytheme {
+@mixin ads {
   @include valo;
-  @include render;
 
-  .login-box {
-    width: 400px;
-  }
-
-  .navbar {
+  .navigation-bar {
     width: 250px;
     position: relative;
 
