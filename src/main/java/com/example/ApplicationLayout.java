@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.*;
 public class ApplicationLayout extends HorizontalLayout implements View {
 
     public static final String VIEW_NAME = "layout";
-    private NavigationBar navBar;
     protected Panel content;
+    private NavigationBar navBar;
 
 
     @Autowired
@@ -27,6 +27,7 @@ public class ApplicationLayout extends HorizontalLayout implements View {
         navBar.addView(TicketView.VIEW_NAME, "Tickets");
         content = new Panel();
         content.setSizeFull();
+        content.addStyleName(MyTheme.PANEL_BORDERLESS);
         addComponents(navBar, content);
         setExpandRatio(content, 1);
     }

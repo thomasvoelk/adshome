@@ -10,7 +10,8 @@ import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import org.vaadin.spring.i18n.*;
 
-@Theme("valo")
+@Theme("mytheme")
+@Title("AwesomeApp")
 @SpringUI
 public class ApplicationUi extends UI {
 
@@ -27,18 +28,6 @@ public class ApplicationUi extends UI {
         this.viewProvider = viewProvider;
     }
 
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
-        setupEventBus();
-        setContent(layout);
-        setupNavigator();
-    }
-
-    private void setupNavigator() {
-        navigator = new Navigator(this, layout.content);
-        navigator.addProvider(viewProvider);
-    }
-
     public static ApplicationUi getCurrent() {
         return (ApplicationUi) UI.getCurrent();
     }
@@ -49,6 +38,18 @@ public class ApplicationUi extends UI {
 
     public static I18N getI18N() {
         return getCurrent().i18n;
+    }
+
+    @Override
+    protected void init(VaadinRequest vaadinRequest) {
+        setupEventBus();
+        setContent(layout);
+        setupNavigator();
+    }
+
+    private void setupNavigator() {
+        navigator = new Navigator(this, layout.content);
+        navigator.addProvider(viewProvider);
     }
 
     private void setupEventBus() {

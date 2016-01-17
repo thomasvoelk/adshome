@@ -5,7 +5,6 @@ import com.vaadin.server.*;
 import com.vaadin.shared.ui.label.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.*;
 
 import java.util.*;
 
@@ -18,16 +17,21 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     public NavigationBar() {
         setHeight("100%");
+        addStyleName(MyTheme.MENU_ROOT);
+        addStyleName(MyTheme.NAVBAR);
         layout = new VerticalSpacedLayout();
         addComponent(layout);
-        layout.addComponent(new Label("<strong>ADS</strong>", ContentMode.HTML));
+        Label logo = new Label("<strong>ADS</strong>", ContentMode.HTML);
+        logo.addStyleName(MyTheme.MENU_TITLE);
+        layout.addComponent(logo);
         addLogoutButton();
     }
 
     public void addView(String viewName, String caption) {
         Button button = new Button(caption, click -> EventBus.post(new NavigationEvent(viewName)));
-        button.addStyleName(ValoTheme.BUTTON_SMALL);
         button.addClickListener(event -> getUI().getNavigator().navigateTo(viewName));
+        button.addStyleName(MyTheme.MENU_ITEM);
+        button.addStyleName(MyTheme.BUTTON_BORDERLESS);
         button.setIcon(FontAwesome.HOME);
         buttonMap.put(viewName, button);
         layout.addComponent(button, layout.getComponentCount() - 1);
@@ -41,9 +45,9 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     @Override
     public void afterViewChange(ViewChangeEvent event) {
-        //buttonMap.values().forEach(button -> button.removeStyleName(MyTheme.SELECTED));
+        buttonMap.values().forEach(button -> button.removeStyleName(MyTheme.SELECTED));
         Button button = buttonMap.get(event.getViewName());
-        //if (button != null) button.addStyleName(MyTheme.SELECTED);
+        if (button != null) button.addStyleName(MyTheme.SELECTED);
     }
 
 
@@ -51,7 +55,8 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
     private void addLogoutButton() {
         Button logout = new Button("Log out", click -> EventBus.post(new LogoutEvent()));
         layout.addComponent(logout);
-        logout.addStyleName(ValoTheme.BUTTON_SMALL);
+        logout.addStyleName(MyTheme.BUTTON_LOGOUT);
+        logout.addStyleName(MyTheme.BUTTON_BORDERLESS);
         logout.setIcon(FontAwesome.SIGN_OUT);
     }
 }
