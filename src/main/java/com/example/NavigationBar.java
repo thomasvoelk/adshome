@@ -40,7 +40,6 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
         Button button = new Button(caption, click -> EventBus.post(new NavigationEvent(viewName)));
         button.addStyleName(AdsTheme.MENU_ITEM);
         button.addStyleName(AdsTheme.BUTTON_BORDERLESS);
-        button.setIcon(FontAwesome.HOME);
         buttonMap.put(viewName, button);
         layout.addComponent(button, layout.getComponentCount() - 1);
 
