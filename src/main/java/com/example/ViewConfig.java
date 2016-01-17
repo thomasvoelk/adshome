@@ -7,11 +7,5 @@ import java.lang.annotation.*;
 public @interface ViewConfig {
     String messageKey();
 
-    String uri();
-
-    String displayName();
-
-    CreateMode createMode() default CreateMode.ALWAYS_NEW;
-
-    enum CreateMode {ALWAYS_NEW, LAZY_INIT, EAGER_INIT}
+    String viewName();
 }

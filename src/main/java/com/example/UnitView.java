@@ -5,7 +5,7 @@ import com.vaadin.shared.ui.label.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 
-@ViewConfig(uri = "", displayName = "Units")
+@ViewConfig(viewName = UnitView.VIEW_NAME, messageKey = "view.unit")
 @SpringView(name = UnitView.VIEW_NAME)
 public class UnitView extends HorizontalLayout implements View {
     public static final String VIEW_NAME = "unitView";

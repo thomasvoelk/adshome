@@ -2,10 +2,12 @@ package com.example;
 
 import com.vaadin.navigator.*;
 import com.vaadin.server.*;
-import com.vaadin.shared.ui.label.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
+import org.springframework.beans.factory.annotation.*;
+import org.vaadin.spring.i18n.*;
 
+import javax.annotation.*;
 import java.util.*;
 
 @UIScope
@@ -14,14 +16,21 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     private Map<String, Button> buttonMap = new HashMap<>();
     private VerticalLayout layout;
+    private I18N i18n;
 
-    public NavigationBar() {
+    @Autowired
+    public NavigationBar(I18N i18n) {
+        this.i18n = i18n;
+    }
+
+    @PostConstruct
+    private void init() {
         setHeight("100%");
         addStyleName(MyTheme.MENU_ROOT);
         addStyleName(MyTheme.NAVBAR);
         layout = new VerticalSpacedLayout();
         addComponent(layout);
-        Label logo = new Label("<strong>ADS</strong>", ContentMode.HTML);
+        Label logo = new Label(i18n.get("application.title"));
         logo.addStyleName(MyTheme.MENU_TITLE);
         layout.addComponent(logo);
         addLogoutButton();
@@ -49,7 +58,6 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
         Button button = buttonMap.get(event.getViewName());
         if (button != null) button.addStyleName(MyTheme.SELECTED);
     }
-
 
 
     private void addLogoutButton() {
