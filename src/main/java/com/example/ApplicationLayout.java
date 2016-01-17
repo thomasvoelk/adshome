@@ -12,13 +12,13 @@ import javax.annotation.*;
 public class ApplicationLayout extends HorizontalLayout implements View {
 
     public static final String VIEW_NAME = "layout";
-    protected Panel contentArea;
+    protected HorizontalLayout contentArea;
     private NavigationBar navigationBar;
 
     @Autowired
     public ApplicationLayout(NavigationBar navigationBar) {
         this.navigationBar = navigationBar;
-        this.contentArea = new Panel();
+        this.contentArea = new HorizontalSpacedLayout();
     }
 
     @PostConstruct

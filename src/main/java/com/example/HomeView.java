@@ -13,7 +13,7 @@ public class HomeView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-        addComponent(new Label("This is the home view"));
+        addComponents(new Label(ApplicationUi.getI18N().get("view.home")));
     }
 
     @Override
