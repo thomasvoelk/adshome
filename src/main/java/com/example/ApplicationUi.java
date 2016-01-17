@@ -61,6 +61,7 @@ public class ApplicationUi extends UI {
         navigator.addProvider(viewProvider);
         navigator.addViewChangeListener(navigationBar);
         navigator.addViewChangeListener(new PageTitleUpdater(i18n));
+        navigator.setErrorView(ErrorView.class);
         navigator.navigateTo(navigator.getState());
     }
 
