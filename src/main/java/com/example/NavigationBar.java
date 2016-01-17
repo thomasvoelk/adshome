@@ -25,15 +25,27 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     @PostConstruct
     private void init() {
+        createLayout();
+        addStyling();
+        addLogo();
+        addLogoutButton();
+    }
+
+    private void addStyling() {
         setHeight("100%");
         addStyleName(AdsTheme.MENU_ROOT);
         addStyleName(AdsTheme.NAVIGATION_BAR);
+    }
+
+    public void createLayout() {
         layout = new VerticalSpacedLayout();
         addComponent(layout);
+    }
+
+    private void addLogo() {
         Label logo = new Label(i18n.get("application.title"));
         logo.addStyleName(AdsTheme.MENU_TITLE);
         layout.addComponent(logo);
-        addLogoutButton();
     }
 
     public void addView(String viewName, String caption) {
