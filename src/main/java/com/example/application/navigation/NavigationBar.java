@@ -17,7 +17,7 @@ import java.util.*;
 public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     private Map<String, Button> buttonMap = new HashMap<>();
-    private VerticalLayout layout;
+    private VerticalLayout contentArea;
     private I18N i18n;
 
     @Autowired
@@ -27,37 +27,12 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     @PostConstruct
     private void init() {
-        createLayout();
+        createContentArea();
         addStyling();
         addLogo();
         addLogoutButton();
     }
 
-    private void addStyling() {
-        setHeight("100%");
-        addStyleName(AdsTheme.MENU_ROOT);
-        addStyleName(AdsTheme.NAVIGATION_BAR);
-    }
-
-    public void createLayout() {
-        layout = new VerticalSpacedLayout();
-        addComponent(layout);
-    }
-
-    private void addLogo() {
-        Label logo = new Label(i18n.get("application.title"));
-        logo.addStyleName(AdsTheme.MENU_TITLE);
-        layout.addComponent(logo);
-    }
-
-    public void addView(String viewName, String caption) {
-        Button button = new Button(caption, click -> EventBus.post(new NavigationEvent(viewName)));
-        button.addStyleName(AdsTheme.MENU_ITEM);
-        button.addStyleName(AdsTheme.BUTTON_BORDERLESS);
-        buttonMap.put(viewName, button);
-        layout.addComponent(button, layout.getComponentCount() - 1);
-
-    }
 
     @Override
     public boolean beforeViewChange(ViewChangeEvent event) {
@@ -71,10 +46,38 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
         if (button != null) button.addStyleName(AdsTheme.SELECTED);
     }
 
+    public void addView(String viewName, String caption) {
+        Button button = new Button(caption, click -> EventBus.post(new NavigationEvent(viewName)));
+        button.addStyleName(AdsTheme.MENU_ITEM);
+        button.addStyleName(AdsTheme.BUTTON_BORDERLESS);
+        buttonMap.put(viewName, button);
+        contentArea.addComponent(button, contentArea.getComponentCount() - 1);
+
+    }
+
+
+    private void createContentArea() {
+        contentArea = new VerticalSpacedLayout();
+        addComponent(contentArea);
+    }
+
+    private void addStyling() {
+        setHeight("100%");
+        addStyleName(AdsTheme.MENU_ROOT);
+        addStyleName(AdsTheme.NAVIGATION_BAR);
+    }
+
+
+    private void addLogo() {
+        Label logo = new Label(i18n.get("application.title"));
+        logo.addStyleName(AdsTheme.MENU_TITLE);
+        contentArea.addComponent(logo);
+    }
+
 
     private void addLogoutButton() {
         Button logout = new Button("Log out", click -> EventBus.post(new LogoutEvent()));
-        layout.addComponent(logout);
+        contentArea.addComponent(logout);
         logout.addStyleName(AdsTheme.BUTTON_LOGOUT);
         logout.addStyleName(AdsTheme.BUTTON_BORDERLESS);
         logout.setIcon(FontAwesome.SIGN_OUT);

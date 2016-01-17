@@ -14,7 +14,7 @@ import javax.annotation.*;
 public class ApplicationLayout extends HorizontalLayout implements View {
 
     public static final String VIEW_NAME = "layout";
-    protected HorizontalLayout contentArea;
+    private HorizontalLayout contentArea;
     private NavigationBar navigationBar;
 
     @Autowired
@@ -31,14 +31,16 @@ public class ApplicationLayout extends HorizontalLayout implements View {
         setExpandRatio(contentArea, 1);
     }
 
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+    }
+
+    protected ComponentContainer getContentArea() {
+        return this.contentArea;
+    }
+
     private void styleContentArea() {
         contentArea.setSizeFull();
         contentArea.addStyleName(AdsTheme.PANEL_BORDERLESS);
-    }
-
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-
     }
 }

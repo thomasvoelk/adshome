@@ -16,7 +16,7 @@ import org.vaadin.spring.i18n.*;
 @SpringUI
 public class ApplicationUi extends UI {
 
-    private final ApplicationLayout layout;
+    private final ApplicationLayout applicationLayout;
     private com.google.common.eventbus.EventBus eventBus;
     private I18N i18n;
     private SpringViewProvider viewProvider;
@@ -24,9 +24,9 @@ public class ApplicationUi extends UI {
     private NavigationBar navigationBar;
 
     @Autowired
-    public ApplicationUi(I18N i18n, ApplicationLayout layout, SpringViewProvider viewProvider, NavigationBar navigationBar) {
+    public ApplicationUi(I18N i18n, ApplicationLayout applicationLayout, @SuppressWarnings("SpringJavaAutowiringInspection") SpringViewProvider viewProvider, NavigationBar navigationBar) {
         this.i18n = i18n;
-        this.layout = layout;
+        this.applicationLayout = applicationLayout;
         this.viewProvider = viewProvider;
         this.navigationBar = navigationBar;
     }
@@ -43,41 +43,12 @@ public class ApplicationUi extends UI {
         return getCurrent().i18n;
     }
 
-
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         setupEventBus();
-        setContent(layout);
+        setContent(applicationLayout);
         registerViews();
         setupNavigator();
-    }
-
-    private void registerViews() {
-        registerView(HomeView.class);
-        registerView(UnitView.class);
-        registerView(TicketView.class);
-    }
-
-    private void setupNavigator() {
-        navigator = new Navigator(this, layout.contentArea);
-        navigator.addProvider(viewProvider);
-        navigator.addViewChangeListener(navigationBar);
-        navigator.addViewChangeListener(new PageTitleUpdater(i18n));
-        navigator.setErrorView(ErrorView.class);
-        navigator.navigateTo(navigator.getState());
-    }
-
-    private void setupEventBus() {
-        eventBus = new com.google.common.eventbus.EventBus((throwable, subscriberExceptionContext) -> {
-            // log error
-            throwable.printStackTrace();
-        });
-        eventBus.register(this);
-    }
-
-    private void registerView(Class<? extends View> viewClass) {
-        ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
-        navigationBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
     }
 
     @Subscribe
@@ -91,4 +62,35 @@ public class ApplicationUi extends UI {
         VaadinSession.getCurrent().close();
         Page.getCurrent().reload();
     }
+
+    private void setupEventBus() {
+        eventBus = new com.google.common.eventbus.EventBus((throwable, subscriberExceptionContext) -> {
+            //FIXME: log error
+            throwable.printStackTrace();
+        });
+        eventBus.register(this);
+    }
+
+    private void registerViews() {
+        registerView(HomeView.class);
+        registerView(UnitView.class);
+        registerView(TicketView.class);
+    }
+
+    private void setupNavigator() {
+        navigator = new Navigator(this, applicationLayout.getContentArea());
+        navigator.addProvider(viewProvider);
+        navigator.addViewChangeListener(navigationBar);
+        navigator.addViewChangeListener(new PageTitleUpdater(i18n));
+        navigator.setErrorView(ErrorView.class);
+        navigator.navigateTo(navigator.getState());
+    }
+
+
+    private void registerView(Class<? extends View> viewClass) {
+        ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
+        navigationBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
+    }
+
+
 }
