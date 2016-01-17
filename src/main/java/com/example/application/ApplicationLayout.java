@@ -1,5 +1,7 @@
-package com.example;
+package com.example.application;
 
+import com.example.application.navigation.*;
+import com.example.application.styling.*;
 import com.vaadin.navigator.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.application;
 
 public class EventBus {
 

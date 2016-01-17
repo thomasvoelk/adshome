@@ -1,5 +1,6 @@
-package com.example;
+package com.example.application;
 
+import com.example.application.view.*;
 import com.vaadin.navigator.*;
 import com.vaadin.server.*;
 import org.vaadin.spring.i18n.*;
@@ -20,13 +21,10 @@ public class PageTitleUpdater implements ViewChangeListener {
 
     @Override
     public void afterViewChange(ViewChangeEvent event) {
-
         View view = event.getNewView();
         ViewConfig viewConfig = view.getClass().getAnnotation(ViewConfig.class);
-
         if (viewConfig != null) {
             Page.getCurrent().setTitle(String.format("%s - %s", i18n.get("application.title"), i18n.get(viewConfig.messageKey())));
         }
-
     }
 }

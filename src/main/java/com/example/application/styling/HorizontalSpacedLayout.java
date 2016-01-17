@@ -1,4 +1,4 @@
-package com.example;
+package com.example.application.styling;
 
 import com.vaadin.ui.*;
 

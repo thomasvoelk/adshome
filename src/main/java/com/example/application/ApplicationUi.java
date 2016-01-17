@@ -1,5 +1,7 @@
-package com.example;
+package com.example.application;
 
+import com.example.application.navigation.*;
+import com.example.application.view.*;
 import com.google.common.eventbus.*;
 import com.vaadin.annotations.*;
 import com.vaadin.navigator.*;

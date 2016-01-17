@@ -1,4 +1,4 @@
-package com.example;
+package com.example.application.navigation;
 
 public class NavigationEvent {
     private String viewName;

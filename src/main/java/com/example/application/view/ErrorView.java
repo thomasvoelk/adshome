@@ -1,5 +1,6 @@
-package com.example;
+package com.example.application.view;
 
+import com.example.application.*;
 import com.vaadin.navigator.*;
 import com.vaadin.ui.*;
 
