@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.vaadin.spring.addons:vaadin-spring-addon-i18n:0.0.6.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/vaadin/spring/addons/vaadin-spring-addon-i18n/0.0.6.RELEASE/vaadin-spring-addon-i18n-0.0.6.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/vaadin/spring/addons/vaadin-spring-addon-i18n/0.0.6.RELEASE/vaadin-spring-addon-i18n-0.0.6.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/vaadin/spring/addons/vaadin-spring-addon-i18n/0.0.6.RELEASE/vaadin-spring-addon-i18n-0.0.6.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
