@@ -16,7 +16,7 @@ import org.vaadin.spring.i18n.*;
 @SpringUI
 public class ApplicationUi extends UI {
 
-    private final ApplicationLayout applicationLayout;
+    private ApplicationLayout applicationLayout;
     private com.google.common.eventbus.EventBus eventBus;
     private I18N i18n;
     private SpringViewProvider viewProvider;
