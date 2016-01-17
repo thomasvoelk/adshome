@@ -46,17 +46,22 @@ public class ApplicationUi extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         setupEventBus();
         setContent(layout);
+        registerViews();
         setupNavigator();
-        Page.getCurrent().setTitle(i18n.get("application.title"));
+    }
+
+    private void registerViews() {
+        registerView(HomeView.class);
+        registerView(UnitView.class);
+        registerView(TicketView.class);
     }
 
     private void setupNavigator() {
         navigator = new Navigator(this, layout.content);
         navigator.addProvider(viewProvider);
         navigator.addViewChangeListener(navigationBar);
-        registerView(HomeView.class);
-        registerView(UnitView.class);
-        registerView(TicketView.class);
+        navigator.addViewChangeListener(new PageTitleUpdater(i18n));
+        navigator.navigateTo(navigator.getState());
     }
 
     private void setupEventBus() {
@@ -75,5 +80,14 @@ public class ApplicationUi extends UI {
     @Subscribe
     public void navigateTo(NavigationEvent view) {
         getNavigator().navigateTo(view.getViewName());
+    }
+
+    @Subscribe
+    public void logout(LogoutEvent logoutEvent) {
+        // Don't invalidate the underlying HTTP session if you are using it for something else
+        VaadinSession.getCurrent().getSession().invalidate();
+        VaadinSession.getCurrent().close();
+        Page.getCurrent().reload();
+
     }
 }
