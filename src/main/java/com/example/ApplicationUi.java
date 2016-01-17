@@ -54,6 +54,9 @@ public class ApplicationUi extends UI {
         navigator = new Navigator(this, layout.content);
         navigator.addProvider(viewProvider);
         navigator.addViewChangeListener(navigationBar);
+        registerView(HomeView.class);
+        registerView(UnitView.class);
+        registerView(TicketView.class);
     }
 
     private void setupEventBus() {
@@ -62,6 +65,11 @@ public class ApplicationUi extends UI {
             throwable.printStackTrace();
         });
         eventBus.register(this);
+    }
+
+    private void registerView(Class<? extends View> viewClass) {
+        ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
+        navigationBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
     }
 
     @Subscribe

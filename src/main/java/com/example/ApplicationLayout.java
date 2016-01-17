@@ -30,9 +30,7 @@ public class ApplicationLayout extends HorizontalLayout implements View {
     }
 
     private void initLayouts() {
-        registerView(HomeView.class);
-        registerView(UnitView.class);
-        registerView(TicketView.class);
+
         content = new Panel();
         content.setSizeFull();
         content.addStyleName(AdsTheme.PANEL_BORDERLESS);
@@ -40,10 +38,6 @@ public class ApplicationLayout extends HorizontalLayout implements View {
         setExpandRatio(content, 1);
     }
 
-    private void registerView(Class<? extends View> viewClass) {
-        ViewConfig viewConfig = viewClass.getAnnotation(ViewConfig.class);
-        navigationBar.addView(viewConfig.viewName(), i18n.get(viewConfig.messageKey()));
-    }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
