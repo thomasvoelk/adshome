@@ -57,7 +57,7 @@ public class ApplicationUi extends UI {
     }
 
     private void setupNavigator() {
-        navigator = new Navigator(this, layout.content);
+        navigator = new Navigator(this, layout.contentArea);
         navigator.addProvider(viewProvider);
         navigator.addViewChangeListener(navigationBar);
         navigator.addViewChangeListener(new PageTitleUpdater(i18n));
@@ -84,10 +84,8 @@ public class ApplicationUi extends UI {
 
     @Subscribe
     public void logout(LogoutEvent logoutEvent) {
-        // Don't invalidate the underlying HTTP session if you are using it for something else
         VaadinSession.getCurrent().getSession().invalidate();
         VaadinSession.getCurrent().close();
         Page.getCurrent().reload();
-
     }
 }
