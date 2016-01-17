@@ -19,12 +19,14 @@ public class ApplicationUi extends UI {
     private I18N i18n;
     private SpringViewProvider viewProvider;
     private Navigator navigator;
+    private NavigationBar navigationBar;
 
     @Autowired
-    public ApplicationUi(I18N i18n, ApplicationLayout layout, SpringViewProvider viewProvider) {
+    public ApplicationUi(I18N i18n, ApplicationLayout layout, SpringViewProvider viewProvider, NavigationBar navigationBar) {
         this.i18n = i18n;
         this.layout = layout;
         this.viewProvider = viewProvider;
+        this.navigationBar = navigationBar;
     }
 
     public static ApplicationUi getCurrent() {
@@ -39,6 +41,7 @@ public class ApplicationUi extends UI {
         return getCurrent().i18n;
     }
 
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         setupEventBus();
@@ -50,6 +53,7 @@ public class ApplicationUi extends UI {
     private void setupNavigator() {
         navigator = new Navigator(this, layout.content);
         navigator.addProvider(viewProvider);
+        navigator.addViewChangeListener(navigationBar);
     }
 
     private void setupEventBus() {
