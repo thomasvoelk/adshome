@@ -12,26 +12,26 @@ import javax.annotation.*;
 public class ApplicationLayout extends HorizontalLayout implements View {
 
     public static final String VIEW_NAME = "layout";
-    protected Panel content;
+    protected Panel contentArea;
     private NavigationBar navigationBar;
 
     @Autowired
     public ApplicationLayout(NavigationBar navigationBar) {
         this.navigationBar = navigationBar;
+        this.contentArea = new Panel();
     }
 
     @PostConstruct
     private void init() {
         setSizeFull();
-        initLayouts();
+        styleContentArea();
+        addComponents(navigationBar, contentArea);
+        setExpandRatio(contentArea, 1);
     }
 
-    private void initLayouts() {
-        content = new Panel();
-        content.setSizeFull();
-        content.addStyleName(AdsTheme.PANEL_BORDERLESS);
-        addComponents(navigationBar, content);
-        setExpandRatio(content, 1);
+    private void styleContentArea() {
+        contentArea.setSizeFull();
+        contentArea.addStyleName(AdsTheme.PANEL_BORDERLESS);
     }
 
 
