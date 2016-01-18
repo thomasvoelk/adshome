@@ -17,7 +17,7 @@ import java.util.*;
 public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     private Map<String, Button> buttonMap = new HashMap<>();
-    private VerticalLayout contentArea;
+    private VerticalLayout menuArea;
     private I18N i18n;
 
     @Autowired
@@ -27,7 +27,7 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
 
     @PostConstruct
     private void init() {
-        createContentArea();
+        createMenuArea();
         addStyling();
         addLogo();
         addLogoutButton();
@@ -51,14 +51,14 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
         button.addStyleName(AdsTheme.MENU_ITEM);
         button.addStyleName(AdsTheme.BUTTON_BORDERLESS);
         buttonMap.put(viewName, button);
-        contentArea.addComponent(button, contentArea.getComponentCount() - 1);
+        menuArea.addComponent(button, menuArea.getComponentCount() - 1);
 
     }
 
 
-    private void createContentArea() {
-        contentArea = new VerticalSpacedLayout();
-        addComponent(contentArea);
+    private void createMenuArea() {
+        menuArea = new VerticalSpacedLayout();
+        addComponent(menuArea);
     }
 
     private void addStyling() {
@@ -71,13 +71,13 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
     private void addLogo() {
         Label logo = new Label(i18n.get("application.title"));
         logo.addStyleName(AdsTheme.MENU_TITLE);
-        contentArea.addComponent(logo);
+        menuArea.addComponent(logo);
     }
 
 
     private void addLogoutButton() {
         Button logout = new Button("Log out", click -> EventBus.post(new LogoutEvent()));
-        contentArea.addComponent(logout);
+        menuArea.addComponent(logout);
         logout.addStyleName(AdsTheme.BUTTON_LOGOUT);
         logout.addStyleName(AdsTheme.BUTTON_BORDERLESS);
         logout.setIcon(FontAwesome.SIGN_OUT);
