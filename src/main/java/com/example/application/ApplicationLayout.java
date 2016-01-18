@@ -1,19 +1,19 @@
 package com.example.application;
 
-import com.example.application.navigation.*;
-import com.example.application.styling.*;
-import com.vaadin.navigator.*;
-import com.vaadin.spring.annotation.*;
-import com.vaadin.ui.*;
-import org.springframework.beans.factory.annotation.*;
+import com.example.application.navigation.NavigationBar;
+import com.example.application.styling.HorizontalSpacedLayout;
+import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.HorizontalLayout;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.*;
+import javax.annotation.PostConstruct;
 
 @UIScope
-@SpringView(name = ApplicationLayout.VIEW_NAME)
-public class ApplicationLayout extends HorizontalLayout implements View {
+@SpringComponent
+public class ApplicationLayout extends HorizontalLayout {
 
-    public static final String VIEW_NAME = "layout";
     private HorizontalLayout contentArea;
     private NavigationBar navigationBar;
 
@@ -29,10 +29,6 @@ public class ApplicationLayout extends HorizontalLayout implements View {
         styleContentArea();
         addComponents(navigationBar, contentArea);
         setExpandRatio(contentArea, 1);
-    }
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
     }
 
     protected ComponentContainer getContentArea() {
