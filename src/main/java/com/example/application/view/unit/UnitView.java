@@ -8,6 +8,7 @@ import com.vaadin.server.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
+import org.vaadin.spring.i18n.*;
 import org.vaadin.viritin.button.*;
 import org.vaadin.viritin.fields.*;
 import org.vaadin.viritin.layouts.*;
@@ -20,19 +21,49 @@ public class UnitView extends VerticalLayout implements View {
     public static final String VIEW_NAME = "unitView";
 
     private UnitDataRepository repository;
-    private MTable<UnitData> list = new MTable<>(UnitData.class)
-            .withProperties("id", "name")
-            .withColumnHeaders("id", "Name")
-            .setSortableProperties("name")
-            .withFullWidth();
-    private Button addNew = new MButton(FontAwesome.PLUS, this::add);
-    private Button edit = new MButton(FontAwesome.PENCIL_SQUARE_O, this::edit);
-    private Button delete = new ConfirmButton(FontAwesome.TRASH_O,
-            ApplicationUi.getI18N().get("view.unit.deleteConfirmation"), this::remove);
+    private I18N i18n;
+    private MTable<UnitData> unitDataTable;
+    private Button addNew;
+    private Button edit;
+    private Button delete;
 
     @Autowired
-    public UnitView(@SuppressWarnings("SpringJavaAutowiringInspection") UnitDataRepository repository) {
+    public UnitView(@SuppressWarnings("SpringJavaAutowiringInspection") UnitDataRepository repository, I18N i18n) {
         this.repository = repository;
+        this.i18n = i18n;
+    }
+
+    @PostConstruct
+    private void init() {
+        createButtons();
+        createTable();
+        addComponent(createLayout());
+        loadUnitData();
+    }
+
+    private Layout createLayout() {
+        return new MVerticalLayout(
+                new Label(i18n.get("view.unit")),
+                new MHorizontalLayout(addNew, edit, delete),
+                unitDataTable
+        ).expand(unitDataTable);
+    }
+
+    private void createTable() {
+        unitDataTable = new MTable<>(UnitData.class)
+                .withProperties("id", "name")
+                .withColumnHeaders(i18n.get("view.unit.unitTable.column.id"), i18n.get("view.unit.unitTable.column.name"))
+                .setSortableProperties("name")
+                .withFullWidth();
+        unitDataTable.addMValueChangeListener(e -> adjustActionButtonState());
+    }
+
+    private void createButtons() {
+        addNew = new MButton(FontAwesome.PLUS, this::add);
+        edit = new MButton(FontAwesome.PENCIL_SQUARE_O, this::edit);
+        delete = new I18nConfirmButton(i18n,
+                FontAwesome.TRASH_O,
+                i18n.get("view.unit.deleteConfirmation"), this::remove);
     }
 
     private void add(Button.ClickEvent clickEvent) {
@@ -40,59 +71,46 @@ public class UnitView extends VerticalLayout implements View {
     }
 
     private void edit(Button.ClickEvent clickEvent) {
-        edit(list.getValue());
+        edit(unitDataTable.getValue());
     }
 
     private void remove(Button.ClickEvent clickEvent) {
-        repository.delete(list.getValue());
-        list.setValue(null);
-        listEntities();
+        repository.delete(unitDataTable.getValue());
+        unitDataTable.setValue(null);
+        loadUnitData();
     }
 
-    protected void edit(final UnitData unitData) {
-        UnitDataForm unitDataForm = new UnitDataForm(
-                unitData);
+    private void edit(UnitData unitData) {
+        UnitDataForm unitDataForm = new UnitDataForm(unitData, i18n);
         unitDataForm.openInModalPopup();
         unitDataForm.setSavedHandler(this::saveEntry);
         unitDataForm.setResetHandler(this::resetEntry);
     }
 
-    public void saveEntry(UnitData entry) {
+    private void saveEntry(UnitData entry) {
         repository.save(entry);
-        listEntities();
+        loadUnitData();
         closeWindow();
     }
 
-    public void resetEntry(UnitData entry) {
-        listEntities();
+    private void resetEntry(UnitData entry) {
+        loadUnitData();
         closeWindow();
     }
 
-    protected void closeWindow() {
+    private void closeWindow() {
         ApplicationUi.getCurrent().getWindows().stream().forEach(w -> ApplicationUi.getCurrent().removeWindow(w));
     }
 
-    @PostConstruct
-    void init() {
 
-        addComponent(
-                new MVerticalLayout(
-                        new Label(ApplicationUi.getI18N().get("view.unit")),
-                        new MHorizontalLayout(addNew, edit, delete),
-                        list
-                ).expand(list));
-        listEntities();
-        list.addMValueChangeListener(e -> adjustActionButtonState());
-    }
-
-    private void listEntities() {
-        list.setBeans(repository.findAll());
+    private void loadUnitData() {
+        unitDataTable.setBeans(repository.findAll());
         adjustActionButtonState();
 
     }
 
-    protected void adjustActionButtonState() {
-        boolean hasSelection = list.getValue() != null;
+    private void adjustActionButtonState() {
+        boolean hasSelection = unitDataTable.getValue() != null;
         edit.setEnabled(hasSelection);
         delete.setEnabled(hasSelection);
     }
