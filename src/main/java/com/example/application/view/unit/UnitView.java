@@ -75,15 +75,14 @@ public class UnitView extends VerticalLayout implements View {
     @PostConstruct
     void init() {
 
-        MVerticalLayout expand = new MVerticalLayout(
-                //new RichText().withMarkDownResource("/welcome.md"),
-                new MHorizontalLayout(addNew, edit, delete),
-                list
-        ).expand(list);
+        addComponent(
+                new MVerticalLayout(
+                        new Label(ApplicationUi.getI18N().get("view.unit")),
+                        new MHorizontalLayout(addNew, edit, delete),
+                        list
+                ).expand(list));
         listEntities();
         list.addMValueChangeListener(e -> adjustActionButtonState());
-        addComponent(new Label(ApplicationUi.getI18N().get("view.unit")));
-        addComponent(expand);
     }
 
     private void listEntities() {
