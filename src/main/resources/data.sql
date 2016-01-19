@@ -1,0 +1,1 @@
+INSERT INTO unit_data(id,name) VALUES (1,'KAIRO'), (2,'Al Minya');
