@@ -1,0 +1,14 @@
+security:
+  basic:
+    enabled: false
+
+spring:
+  messages:
+    basename: config/i18n/messages
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      tool:
+        hbm2ddl: DEBUG
+    show-sql: true

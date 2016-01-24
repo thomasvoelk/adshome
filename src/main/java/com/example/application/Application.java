@@ -22,8 +22,5 @@ public class Application {
         return new I18N(applicationContext);
     }
 
-	@Bean
-	public MessageProvider messageSource() {
-        return new ResourceBundleMessageProvider("messages.properties");
-	}
+
 }
