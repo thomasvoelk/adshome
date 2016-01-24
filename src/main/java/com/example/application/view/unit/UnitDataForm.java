@@ -9,11 +9,14 @@ import org.vaadin.viritin.layouts.*;
 
 public class UnitDataForm extends I18nAbstractForm<UnitData> {
 
-    TextField name = new MTextField("Name");
+    TextField unitName;
+    TextField unitCode;
 
 
     UnitDataForm(UnitData unitData, I18N i18n) {
         super(i18n);
+        unitName = new MTextField(i18n.get("view.unit.form.name"));
+        unitCode = new MTextField(i18n.get("view.unit.form.code"));
         setSizeUndefined();
         setEntity(unitData);
     }
@@ -22,7 +25,8 @@ public class UnitDataForm extends I18nAbstractForm<UnitData> {
     protected Component createContent() {
         return new MVerticalLayout(
                 new MFormLayout(
-                        name
+                        unitCode,
+                        unitName
                 ).withWidth(""),
                 getToolbar()
         ).withWidth("");

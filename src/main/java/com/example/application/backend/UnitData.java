@@ -1,5 +1,7 @@
 package com.example.application.backend;
 
+import org.hibernate.validator.constraints.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -10,8 +12,14 @@ public class UnitData {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name = "UNIT_NAME")
     @NotNull(message = "Name is required")
-    private String name;
+    private String unitName;
+
+    @Column(name = "UNIT_CODE")
+    @NotNull(message = "Code is required")
+    @Length(max = 3, min = 3)
+    private String unitCode;
 
     public long getId() {
         return id;
@@ -21,11 +29,19 @@ public class UnitData {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUnitName() {
+        return unitName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public String getUnitCode() {
+        return unitCode;
+    }
+
+    public void setUnitCode(String unitCode) {
+        this.unitCode = unitCode;
     }
 }

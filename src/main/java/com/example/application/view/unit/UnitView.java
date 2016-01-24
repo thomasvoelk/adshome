@@ -51,9 +51,9 @@ public class UnitView extends VerticalLayout implements View {
 
     private void createTable() {
         unitDataTable = new MTable<>(UnitData.class)
-                .withProperties("id", "name")
-                .withColumnHeaders(i18n.get("view.unit.unitTable.column.id"), i18n.get("view.unit.unitTable.column.name"))
-                .setSortableProperties("name")
+                .withProperties("unitCode", "unitName")
+                .withColumnHeaders(i18n.get("view.unit.unitTable.column.code"), i18n.get("view.unit.unitTable.column.name"))
+                .setSortableProperties("unitCode", "unitName")
                 .withFullWidth();
         unitDataTable.addMValueChangeListener(e -> adjustActionButtonState());
     }
