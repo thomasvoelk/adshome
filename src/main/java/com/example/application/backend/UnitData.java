@@ -44,4 +44,20 @@ public class UnitData {
     public void setUnitCode(String unitCode) {
         this.unitCode = unitCode;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UnitData unitData = (UnitData) o;
+
+        return id == unitData.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }
