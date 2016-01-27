@@ -14,3 +14,8 @@ spring:
       tool:
         hbm2ddl: DEBUG
     show-sql: true
+
+logging:
+    #file: /var/memento/security.log
+    level:
+        com.vaadin.data.util.LegacyPropertyHelper: 'DEBUG'
