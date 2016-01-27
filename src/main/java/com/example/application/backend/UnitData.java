@@ -1,11 +1,14 @@
 package com.example.application.backend;
 
+import org.hibernate.annotations.*;
 import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.*;
 
 @Entity
+@BatchSize(size = 10)
 public class UnitData {
 
     @Id

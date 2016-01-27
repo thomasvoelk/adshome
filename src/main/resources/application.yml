@@ -7,6 +7,8 @@ spring:
     basename: config/i18n/messages
 
   jpa:
+
+    open-in-view: true
     hibernate:
       ddl-auto: create
       tool:
