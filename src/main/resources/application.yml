@@ -18,4 +18,5 @@ spring:
 logging:
     #file: /var/memento/security.log
     level:
-        com.vaadin.data.util.LegacyPropertyHelper: 'DEBUG'
+        ROOT: INFO
+        com.vaadin.data.util.LegacyPropertyHelper: DEBUG
