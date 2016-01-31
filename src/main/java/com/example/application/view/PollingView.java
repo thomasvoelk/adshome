@@ -9,7 +9,6 @@ import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 
 import java.util.concurrent.*;
-import java.util.function.*;
 
 @SpringView(name = PollingView.VIEW_NAME)
 @ViewConfig(viewName = PollingView.VIEW_NAME, messageKey = "view.polling")
@@ -47,29 +46,19 @@ public class PollingView extends CustomComponent implements View {
     private void futureButtonClick() {
         getUI().setPollInterval(1000);
         label.setValue("Running...");
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+        CompletableFuture<Void> startJob = CompletableFuture.runAsync(() -> {
             try {
-                System.err.println("clicked");
-                Thread.sleep(4500);
-                System.err.println("slept");
+                TimeUnit.SECONDS.sleep(1);
+                EventBus.post(new LongTaskFinishedEvent("The future is here"));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
-        future.thenAccept(onDone()).handle(handleException());
-    }
-
-
-    private Consumer<Void> onDone() {
-
-        return aVoid -> EventBus.post(new LongTaskFinishedEvent("The future is here"));
-    }
-
-    private BiFunction<Void, Throwable, Object> handleException() {
-        return (aVoid, throwable) -> {
+        startJob.exceptionally(throwable -> {
+            throwable.printStackTrace();
             getUI().setPollInterval(-1);
-            return aVoid;
-        };
+            return null;
+        });
     }
 
     @Override
