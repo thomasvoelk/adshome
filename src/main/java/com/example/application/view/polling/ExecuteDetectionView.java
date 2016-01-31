@@ -5,22 +5,23 @@ import com.example.application.EventBus;
 import com.example.application.styling.*;
 import com.example.application.view.*;
 import com.google.common.eventbus.*;
+import com.google.common.util.concurrent.*;
 import com.vaadin.navigator.*;
 import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 
 import java.util.concurrent.*;
 
-@SpringView(name = PollingView.VIEW_NAME)
-@ViewConfig(viewName = PollingView.VIEW_NAME, messageKey = "view.polling")
-public class PollingView extends CustomComponent implements View {
+@SpringView(name = ExecuteDetectionView.VIEW_NAME)
+@ViewConfig(viewName = ExecuteDetectionView.VIEW_NAME, messageKey = "view.executeDetection")
+public class ExecuteDetectionView extends CustomComponent implements View {
 
     public static final String VIEW_NAME = "pollingView";
     Label label = new Label();
     Button oldSchoolButton = new Button("Start (Old School)", clickEvent -> oldSchoolButtonClick());
     Button futureButton = new Button("Start (Future)", clickEvent -> futureButtonClick());
 
-    public PollingView() {
+    public ExecuteDetectionView() {
         VerticalSpacedLayout layout = new VerticalSpacedLayout();
         layout.addComponent(label);
         label.setValue("Idle");
@@ -48,7 +49,14 @@ public class PollingView extends CustomComponent implements View {
         ApplicationUi.getCurrent().setPollInterval(1000);
         label.setValue("Running...");
         DetectionService service = new DetectionService();
-        CompletableFuture<Long> startExecution = CompletableFuture.supplyAsync(() -> service.startDetection(new DetectionRequest("Unit1", "Scenario2", new ExecutionPeriod(4711, 8877))));
+        final ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("Detection-%d")
+                .build();
+        final ExecutorService pool = Executors.newFixedThreadPool(10, threadFactory);
+        CompletableFuture<Long> startExecution =
+                CompletableFuture.supplyAsync(() ->
+                                service.startDetection(new DetectionRequest("Unit1", "Scenario2", new ExecutionPeriod(4711, 8877)))
+                        , pool);
         startExecution.exceptionally(throwable -> {
             throwable.printStackTrace();
             ApplicationUi.getCurrent().setPollInterval(-1);

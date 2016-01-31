@@ -78,7 +78,7 @@ public class ApplicationUi extends UI {
         registerView(HomeView.class);
         registerView(UnitView.class);
         registerView(TicketView.class);
-        registerView(PollingView.class);
+        registerView(ExecuteDetectionView.class);
     }
 
     private void setupNavigator() {

@@ -20,3 +20,4 @@ logging:
     level:
         ROOT: INFO
         com.vaadin.data.util.LegacyPropertyHelper: DEBUG
+        com.example: DEBUG
