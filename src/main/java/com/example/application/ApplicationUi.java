@@ -72,6 +72,7 @@ public class ApplicationUi extends UI {
             throwable.printStackTrace();
         });
         eventBus.register(this);
+        addDetachListener(detachEvent -> eventBus.unregister(this));
     }
 
     private void registerViews() {

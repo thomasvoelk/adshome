@@ -29,6 +29,7 @@ public class ExecuteDetectionView extends CustomComponent implements View {
         layout.addComponent(futureButton);
         setCompositionRoot(layout);
         EventBus.register(this);
+        addDetachListener(detachEvent -> EventBus.unregister(this));
     }
 
 
