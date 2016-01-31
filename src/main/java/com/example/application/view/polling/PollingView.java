@@ -33,7 +33,7 @@ public class PollingView extends CustomComponent implements View {
 
     private void oldSchoolButtonClick() {
         label.setValue("Running...");
-        getUI().setPollInterval(1000);
+        ApplicationUi.getCurrent().setPollInterval(1000);
         new Thread(new Loader()).start();
 
     }
@@ -41,17 +41,17 @@ public class PollingView extends CustomComponent implements View {
     @Subscribe
     public void onLongTaskFinished(LongTaskFinishedEvent event) {
         label.setValue("Task ID: " + event.getId());
-        getUI().setPollInterval(-1);
+        ApplicationUi.getCurrent().setPollInterval(-1);
     }
 
     private void futureButtonClick() {
-        getUI().setPollInterval(1000);
+        ApplicationUi.getCurrent().setPollInterval(1000);
         label.setValue("Running...");
         DetectionService service = new DetectionService();
         CompletableFuture<Long> startExecution = CompletableFuture.supplyAsync(() -> service.startDetection(new DetectionRequest("Unit1", "Scenario2", new ExecutionPeriod(4711, 8877))));
         startExecution.exceptionally(throwable -> {
             throwable.printStackTrace();
-            getUI().setPollInterval(-1);
+            ApplicationUi.getCurrent().setPollInterval(-1);
             return -1L;
         });
     }
@@ -70,7 +70,7 @@ public class PollingView extends CustomComponent implements View {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            getUI().access(() -> {
+            ApplicationUi.getCurrent().access(() -> {
                 label.setValue("Finished");
                 ApplicationUi.getCurrent().setPollInterval(-1);
             });
