@@ -1,8 +1,9 @@
-package com.example.application.view;
+package com.example.application.view.polling;
 
 import com.example.application.*;
 import com.example.application.EventBus;
 import com.example.application.styling.*;
+import com.example.application.view.*;
 import com.google.common.eventbus.*;
 import com.vaadin.navigator.*;
 import com.vaadin.spring.annotation.*;
@@ -39,25 +40,19 @@ public class PollingView extends CustomComponent implements View {
 
     @Subscribe
     public void onLongTaskFinished(LongTaskFinishedEvent event) {
-        label.setValue(event.getMessage());
+        label.setValue("Task ID: " + event.getId());
         getUI().setPollInterval(-1);
     }
 
     private void futureButtonClick() {
         getUI().setPollInterval(1000);
         label.setValue("Running...");
-        CompletableFuture<Void> startJob = CompletableFuture.runAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-                EventBus.post(new LongTaskFinishedEvent("The future is here"));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        startJob.exceptionally(throwable -> {
+        DetectionService service = new DetectionService();
+        CompletableFuture<Long> startExecution = CompletableFuture.supplyAsync(() -> service.startDetection(new DetectionRequest("Unit1", "Scenario2", new ExecutionPeriod(4711, 8877))));
+        startExecution.exceptionally(throwable -> {
             throwable.printStackTrace();
             getUI().setPollInterval(-1);
-            return null;
+            return -1L;
         });
     }
 

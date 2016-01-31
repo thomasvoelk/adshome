@@ -2,13 +2,13 @@ package com.example.application;
 
 public class LongTaskFinishedEvent {
 
-    private String message;
+    private Long id;
 
-    public LongTaskFinishedEvent(String message) {
-        this.message = message;
+    public LongTaskFinishedEvent(Long id) {
+        this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public Long getId() {
+        return id;
     }
 }

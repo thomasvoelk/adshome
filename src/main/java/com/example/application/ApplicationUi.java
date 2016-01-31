@@ -2,6 +2,7 @@ package com.example.application;
 
 import com.example.application.navigation.*;
 import com.example.application.view.*;
+import com.example.application.view.polling.*;
 import com.example.application.view.ticket.*;
 import com.example.application.view.unit.*;
 import com.google.common.eventbus.*;
