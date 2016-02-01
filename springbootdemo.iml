@@ -50,8 +50,6 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:2.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.vaadin.spring.addons:vaadin-spring-addon-i18n:0.0.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.vaadin:vaadin-spring:1.0.0.beta3" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:springloaded:1.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.3.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.3.1.RELEASE" level="project" />
@@ -100,6 +98,9 @@
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-spring-boot:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.5.5" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:7.5.5" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-spring:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:1.3.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:1.3.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.0.30" level="project" />
@@ -113,7 +114,6 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.4" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.h2database:h2:1.4.190" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:1.3.1.RELEASE" level="project" />

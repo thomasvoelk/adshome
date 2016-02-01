@@ -7,12 +7,11 @@ import com.example.application.view.*;
 import com.google.common.eventbus.*;
 import com.google.common.util.concurrent.*;
 import com.vaadin.navigator.*;
-import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 
 import java.util.concurrent.*;
 
-@SpringView(name = ExecuteDetectionView.VIEW_NAME)
+//@SpringView(name = ExecuteDetectionView.VIEW_NAME)
 @ViewConfig(viewName = ExecuteDetectionView.VIEW_NAME, messageKey = "view.executeDetection")
 public class ExecuteDetectionView extends CustomComponent implements View {
 

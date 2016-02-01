@@ -10,7 +10,6 @@ import com.vaadin.annotations.*;
 import com.vaadin.navigator.*;
 import com.vaadin.server.*;
 import com.vaadin.spring.annotation.*;
-import com.vaadin.spring.navigator.*;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import org.vaadin.spring.i18n.*;
@@ -22,12 +21,12 @@ public class ApplicationUi extends UI {
     private ApplicationLayout applicationLayout;
     private com.google.common.eventbus.EventBus eventBus;
     private I18N i18n;
-    private SpringViewProvider viewProvider;
+    private ViewProvider viewProvider;
     private Navigator navigator;
     private NavigationBar navigationBar;
 
     @Autowired
-    public ApplicationUi(I18N i18n, ApplicationLayout applicationLayout, @SuppressWarnings("SpringJavaAutowiringInspection") SpringViewProvider viewProvider, NavigationBar navigationBar) {
+    public ApplicationUi(I18N i18n, ApplicationLayout applicationLayout, @SuppressWarnings("SpringJavaAutowiringInspection") ViewProvider viewProvider, NavigationBar navigationBar) {
         this.i18n = i18n;
         this.applicationLayout = applicationLayout;
         this.viewProvider = viewProvider;

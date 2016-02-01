@@ -5,7 +5,6 @@ import com.example.application.backend.*;
 import com.example.application.view.*;
 import com.vaadin.navigator.*;
 import com.vaadin.server.*;
-import com.vaadin.spring.annotation.*;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import org.vaadin.spring.i18n.*;
@@ -17,7 +16,6 @@ import javax.annotation.*;
 import java.util.*;
 
 @ViewConfig(viewName = TicketView.VIEW_NAME, messageKey = "view.ticket")
-@SpringView(name = TicketView.VIEW_NAME)
 public class TicketView extends HorizontalLayout implements View {
     public static final String VIEW_NAME = "ticketView";
 
