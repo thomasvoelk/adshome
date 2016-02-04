@@ -20,18 +20,32 @@
 //$v-error-indicator-color: #ed473b;
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+$valo-menu-background-color: #414B56;
 @import "../valo/valo.scss";
 
 @mixin ads {
   @include valo;
 
+  .ads-menu-area {
+    margin: 0;
+    padding: 0;
+  }
+
   .navigation-bar {
     width: 250px;
     position: relative;
 
-    .valo-menu-item,
     .valo-menu-title {
+      font-weight: bold;
+      text-align: center;
+      background: transparent;
+      @include box-shadow(none);
+      border-bottom: none;
+    }
+
+    .valo-menu-item {
       text-align: left;
+      margin-left: 17px;
     }
 
     .logout {
@@ -39,5 +53,4 @@
       bottom: 10px;
     }
   }
-
 }
