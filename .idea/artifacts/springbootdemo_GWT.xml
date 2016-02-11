@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact name="springbootdemo:GWT">
-    <output-path>$PROJECT_DIR$/target/classes/VAADIN/widgetsets</output-path>
+    <output-path>src/main/webapp/VAADIN/widgetsets</output-path>
     <root id="root">
       <element id="directory" name="VAADIN">
         <element id="directory" name="widgetsets">
