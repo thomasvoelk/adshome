@@ -11,6 +11,7 @@ import com.google.common.util.concurrent.*;
 import com.vaadin.navigator.*;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.core.env.*;
 import org.vaadin.viritin.grid.*;
 
 import java.util.concurrent.*;
@@ -25,9 +26,10 @@ public class ExecuteDetectionView extends CustomComponent implements View {
     Button futureButton = new Button("Start (Future)", clickEvent -> futureButtonClick());
     MGrid<UnitData> unitGrid;
     private UnitDataRepository repository;
+    private Environment environment;
 
     @Autowired
-    public ExecuteDetectionView(UnitDataRepository repository) {
+    public ExecuteDetectionView(UnitDataRepository repository, Environment environment) {
         this.repository = repository;
         VerticalSpacedLayout layout = new VerticalSpacedLayout();
         layout.addComponent(label);
@@ -41,6 +43,9 @@ public class ExecuteDetectionView extends CustomComponent implements View {
         unitGrid = new MGrid<>(repository.findAll());
         unitGrid.getColumn("favorite").setConverter(new BooleanToFontawesomeConverter()).setRenderer(new HtmlButtonRenderer());
         layout.addComponent(unitGrid);
+        String[] activeProfiles = environment.getActiveProfiles();
+        if (activeProfiles.length > 0)
+            layout.addComponent(new Label(activeProfiles[0]));
     }
 
 
