@@ -41,7 +41,7 @@ public class ExecuteDetectionView extends CustomComponent implements View {
         addDetachListener(detachEvent -> EventBus.unregister(this));
 
         unitGrid = new MGrid<>(repository.findAll());
-        unitGrid.getColumn("favorite").setConverter(new BooleanToFontawesomeConverter()).setRenderer(new HtmlButtonRenderer());
+        unitGrid.getColumn("favorite").setRenderer(new HtmlButtonRenderer(), new BooleanToFontawesomeConverter());
         layout.addComponent(unitGrid);
         String[] activeProfiles = environment.getActiveProfiles();
         if (activeProfiles.length > 0)
