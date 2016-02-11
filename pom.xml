@@ -83,6 +83,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client</artifactId>
+            <version>7.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client-compiled</artifactId>
+            <version>7.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -90,7 +106,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>7.5.5</version>
+                <version>7.6.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -98,8 +114,16 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+        </resources>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
                 <version>2.1.0</version>
@@ -124,7 +148,7 @@
                         <version>5.0.7.Final</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -139,7 +163,11 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
-                <version>7.5.5</version>
+                <version>7.6.2</version>
+                <configuration>
+                    <webappDirectory>${project.build.outputDirectory}/VAADIN/widgetsets</webappDirectory>
+                    <strict>true</strict>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

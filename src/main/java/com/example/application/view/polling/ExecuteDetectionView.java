@@ -2,12 +2,16 @@ package com.example.application.view.polling;
 
 import com.example.application.*;
 import com.example.application.EventBus;
+import com.example.application.backend.*;
 import com.example.application.styling.*;
 import com.example.application.view.*;
+import com.example.application.widgetset.*;
 import com.google.common.eventbus.*;
 import com.google.common.util.concurrent.*;
 import com.vaadin.navigator.*;
 import com.vaadin.ui.*;
+import org.springframework.beans.factory.annotation.*;
+import org.vaadin.viritin.grid.*;
 
 import java.util.concurrent.*;
 
@@ -19,8 +23,12 @@ public class ExecuteDetectionView extends CustomComponent implements View {
     Label label = new Label();
     Button oldSchoolButton = new Button("Start (Old School)", clickEvent -> oldSchoolButtonClick());
     Button futureButton = new Button("Start (Future)", clickEvent -> futureButtonClick());
+    MGrid<UnitData> unitGrid;
+    private UnitDataRepository repository;
 
-    public ExecuteDetectionView() {
+    @Autowired
+    public ExecuteDetectionView(UnitDataRepository repository) {
+        this.repository = repository;
         VerticalSpacedLayout layout = new VerticalSpacedLayout();
         layout.addComponent(label);
         label.setValue("Idle");
@@ -29,6 +37,10 @@ public class ExecuteDetectionView extends CustomComponent implements View {
         setCompositionRoot(layout);
         EventBus.register(this);
         addDetachListener(detachEvent -> EventBus.unregister(this));
+
+        unitGrid = new MGrid<>(repository.findAll());
+        unitGrid.getColumn("favorite").setConverter(new BooleanToFontawesomeConverter()).setRenderer(new HtmlButtonRenderer());
+        layout.addComponent(unitGrid);
     }
 
 

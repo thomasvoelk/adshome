@@ -24,6 +24,9 @@ public class UnitData {
     @Length(max = 3, min = 3)
     private String unitCode;
 
+    @Column(name = "UNIT_FAVORITE")
+    private Boolean favorite;
+
     public long getId() {
         return id;
     }
@@ -46,6 +49,14 @@ public class UnitData {
 
     public void setUnitCode(String unitCode) {
         this.unitCode = unitCode;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 
     @Override

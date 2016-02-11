@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.vaadin.spring.i18n.*;
 
 @Theme("ads")
+@Widgetset("com.example.application.widgetset.WidgetSet")
 @SpringUI
 public class ApplicationUi extends UI {
 
