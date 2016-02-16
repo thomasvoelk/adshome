@@ -1,5 +1,6 @@
 package com.example.application.backend;
 
+import com.mysema.query.*;
 import org.springframework.data.jpa.repository.support.*;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class UnitDataRepositoryImpl extends QueryDslRepositorySupport implements
     @Override
     public List<UnitData> xxx() {
         System.out.println("XXX" + unitData.unitName);
+        List<Tuple> a = from(unitData).groupBy(unitData.unitCode, unitData.unitName).where(unitData.unitName.startsWithIgnoreCase("a")).list(unitData.unitName, unitData.unitName.count());
         return from(unitData).fetchAll().list(unitData);
     }
 }
