@@ -58,6 +58,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
@@ -87,18 +88,18 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-client</artifactId>
             <version>7.6.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>validation-api</artifactId>
+                    <groupId>javax.validation</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-client-compiled</artifactId>
             <version>7.6.2</version>
         </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -126,32 +127,35 @@
             </resource>
         </resources>
         <plugins>
-            <!--<plugin>
-                <groupId>org.bsc.maven</groupId>
-                <artifactId>maven-processor-plugin</artifactId>
-                <version>2.1.0</version>
-                <executions>
-                    <execution>
-                        <id>process</id>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <processors>
-                                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-                            </processors>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-jpamodelgen</artifactId>
-                        <version>5.0.7.Final</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
+            <!--<plugin>-->
+            <!--<groupId>org.bsc.maven</groupId>-->
+            <!--<artifactId>maven-processor-plugin</artifactId>-->
+            <!--<version>2.1.0</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>process</id>-->
+            <!--<goals>-->
+            <!--<goal>process</goal>-->
+            <!--</goals>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<configuration>-->
+            <!--<processors>-->
+            <!--<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>-->
+            <!--</processors>-->
+            <!--<excludes>-->
+            <!--<exclude>**/VAADIN//*</exclude>-->
+            <!--</excludes>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-jpamodelgen</artifactId>-->
+            <!--<version>5.0.7.Final</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+            <!--</plugin>-->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>

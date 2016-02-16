@@ -102,7 +102,7 @@ public class UnitView extends VerticalLayout implements View {
 
 
     private void loadUnitData() {
-        unitDataTable.setBeans(repository.findAll());
+        unitDataTable.setBeans(repository.xxx());
         adjustActionButtonState();
 
     }

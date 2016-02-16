@@ -42,6 +42,7 @@ public class ExecuteDetectionView extends CustomComponent implements View {
 
         unitGrid = new MGrid<>(repository.findAll());
         unitGrid.getColumn("favorite").setRenderer(new HtmlButtonRenderer(), new BooleanToFontawesomeConverter());
+        unitGrid.setEditorEnabled(true);
         layout.addComponent(unitGrid);
         String[] activeProfiles = environment.getActiveProfiles();
         if (activeProfiles.length > 0)
