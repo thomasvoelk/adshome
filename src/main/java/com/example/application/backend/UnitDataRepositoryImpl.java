@@ -8,13 +8,6 @@ import java.util.*;
 import static com.example.application.backend.QUnitData.*;
 
 public class UnitDataRepositoryImpl extends QueryDslRepositorySupport implements UnitDataRepositoryCustom {
-//
-//    private EntityManager em;
-//
-//    @Autowired
-//    public UnitDataRepositoryImpl(EntityManager em) {
-//        this.em = em;
-//    }
 
     public UnitDataRepositoryImpl() {
         super(UnitData.class);
