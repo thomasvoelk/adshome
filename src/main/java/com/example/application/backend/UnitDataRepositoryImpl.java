@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.*;
 import javax.persistence.*;
 import java.util.*;
 
-public class UnitDataRepositoryImpl implements CustomUnitDataRepository {
+public class UnitDataRepositoryImpl implements UnitDataRepositoryCustom {
 
     private EntityManager em;
 
