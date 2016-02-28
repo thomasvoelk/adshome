@@ -2,6 +2,7 @@ package com.example.application;
 
 import com.example.application.navigation.*;
 import com.example.application.view.*;
+import com.example.application.view.characteristics.*;
 import com.example.application.view.polling.*;
 import com.example.application.view.ticket.*;
 import com.example.application.view.unit.*;
@@ -80,6 +81,7 @@ public class ApplicationUi extends UI {
         registerView(UnitView.class);
         registerView(TicketView.class);
         registerView(ExecuteDetectionView.class);
+        registerView(CharacteristicsView.class);
     }
 
     private void setupNavigator() {
