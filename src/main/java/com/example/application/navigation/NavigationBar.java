@@ -73,6 +73,7 @@ public class NavigationBar extends CssLayout implements ViewChangeListener {
         setHeight("100%");
         addStyleName(AdsTheme.MENU_ROOT);
         addStyleName(AdsTheme.NAVIGATION_BAR);
+        addStyleName(AdsTheme.MENU_PART);
     }
 
 
