@@ -4,6 +4,7 @@ import com.example.application.view.*;
 import com.vaadin.data.*;
 import com.vaadin.navigator.*;
 import com.vaadin.ui.*;
+import org.springframework.beans.factory.annotation.*;
 import org.vaadin.viritin.*;
 import org.vaadin.viritin.fields.*;
 
@@ -18,11 +19,18 @@ public class CharacteristicsView extends VerticalLayout implements View {
     private MTable<Characteristic> table;
     private ListContainer<Characteristic> characteristicContainer;
     private Map<Object, Field> fields = new HashMap<>();
+    private UiScopedComponent uic;
+
+    @Autowired
+    public CharacteristicsView(UiScopedComponent uic) {
+        this.uic = uic;
+    }
 
     @PostConstruct
     private void init() {
         removeAllComponents();
         table = new MTable<>(Characteristic.class);
+        table.setCaption(uic.getDate());
         addComponent(table);
     }
 
