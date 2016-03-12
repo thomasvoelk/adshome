@@ -1,5 +1,6 @@
 @import "ads";
 @import "addons.scss";
+@import "layouts/main-header.scss";
 
 // This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
 // The actual styles should be defined in ads.scss
@@ -7,5 +8,6 @@
 .ads {
   @include addons;
   @include ads;
+  @include main-header;
 
 }
